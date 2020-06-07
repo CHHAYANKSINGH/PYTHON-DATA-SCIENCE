@@ -1,0 +1,53 @@
+How are Python dictionaries different from Python lists?
+    Python lists are indexed using integers and dictionaries can use strings as indexes
+What is a term commonly used to describe the Python dictionary feature in other programming languages?
+    Associative arrays
+What would the following Python code print out? stuff = dict(); print stuff['candy']
+    The program would fail with a traceback
+What would the following Python code print out? stuff = dict(); print stuff.get('candy',-1)
+    -1
+(T/F) When you add items to a dictionary they remain in the order in which you added them.
+    False
+What is a common use of Python dictionaries in a program?
+    Building a histogram counting the occurrences of various strings in a file
+Which of the following lines of Python is equivalent to the following sequence of statements assuming that counts is a dictionary? if key in counts: counts[key] = counts[key] + 1 else: counts[key] = 1
+    counts[key] = counts.get(key,0) + 1
+In the following Python, what does the for loop iterate through? x = dict() ... for y in x : ...
+    It loops through the keys in the dictionary
+Which method in a dictionary object gives you a list of the values in the dictionary?
+    values()
+What is the purpose of the second parameter of the get() method for Python dictionaries?
+    To provide a default value if the key is not found
+    
+    ******************************************************
+    ASSIGNMENT 9.4
+    9.4 Write a program to read through the mbox-short.txt and
+figure out who has the sent the greatest number of mail messages.
+The program looks for 'From ' lines and takes the second word of those
+lines as the person who sent the mail. The program creates a Python dictionary
+that maps the sender's mail address to a count of the number of times they appear in
+the file. After the dictionary is produced,
+the program reads through the dictionary using a maximum loop to find the most prolific committer
+
+name = input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+text = open(name)
+mails= dict()
+
+for line in text:
+    line.rstrip()
+    if not line.startswith("From "): continue
+    words = line.split()
+    mails[words[1]] = mails.get(words[1],0)+1
+
+largest = None
+largest_mail = None
+
+for key in mails:
+    if largest is None: largest = mails[key]
+
+    if largest < mails[key]:
+        largest = mails[key]
+        largest_mail = key
+
+print(largest_mail, largest)
